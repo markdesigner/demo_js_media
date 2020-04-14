@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <video id="video" autoplay="true"></video>
+    <script>
+        let constraints = {
+            audio: true,
+            video: { width: 580, height: 320 }
+        }
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                console.log(stream)
+                let video = document.querySelector('#video')
+                // video.src = URL.createObjectURL(stream)
+                video.srcObject = stream;
+                video.controls = true
+                // let url= window.URL.createObjectURL(stream);
+                // console.log(url)
+                /* 使用这个stream stream */
+            })
+            .catch(function (err) {
+                console.log(err)
+                /* 处理error */
+            });
+    </script>
+    <!-- <script>
+        navigator.getUserMedia = navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia;
+
+if (navigator.getUserMedia) {
+   navigator.getUserMedia({ audio: true, video: { width: 1280, height: 720 } },
+      function(stream) {
+         var video = document.querySelector('video');
+         video.src = window.URL.createObjectURL(stream);
+         video.onloadedmetadata = function(e) {
+           video.play();
+         };
+      },
+      function(err) {
+         console.log("The following error occurred: " + err.name);
+      }
+   );
+} else {
+   console.log("getUserMedia not supported");
+}
+    </script> -->
+</body>
+
+</html>
